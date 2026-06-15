@@ -87,7 +87,6 @@ npm run db:reset      # Reset DB + seed
 
 ## Comptes de test
 
-Mot de passe pour tous : **`Password123!`**
 
 | Rôle | Email |
 |------|-------|
