@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X, Shield } from "lucide-react";
+import { Menu, X, ShieldCheck } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Button } from "@/components/ui/button";
 import { company, navigation, CLIENT_PORTAL_URL } from "@/content/siteContent";
@@ -10,53 +10,73 @@ import { cn } from "@/lib/utils";
 
 export function MarketingHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0f1a]/90 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
-        <Link href="/" className="group flex items-center gap-2.5">
-          <div className="flex size-9 items-center justify-center rounded-lg bg-sky-500/10 ring-1 ring-sky-500/30">
-            <Shield className="size-5 text-sky-400" />
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-300",
+        scrolled
+          ? "border-b border-white/10 bg-[#060b15]/82 shadow-[0_8px_34px_-22px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
+      )}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 md:px-8">
+        <Link href="/" className="group flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-500/10">
+            <ShieldCheck className="size-5 text-cyan-300" />
           </div>
-          <span className="text-lg font-semibold tracking-tight text-white">
-            {company.name}
-          </span>
+          <div className="leading-none">
+            <p className="text-lg font-semibold tracking-wide text-white">
+              {company.name}
+            </p>
+            <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-slate-500">
+              Securite & telecom
+            </p>
+          </div>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-8 xl:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-slate-400 transition-colors hover:text-white"
+              className="text-sm text-slate-300/90 transition-colors hover:text-white"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-2.5 md:flex">
           <ButtonLink
             href={CLIENT_PORTAL_URL}
             variant="outline"
             size="sm"
-            className="border-white/10 bg-transparent text-slate-200 hover:bg-white/5 hover:text-white"
+            className="h-9 border-white/15 bg-white/[0.03] px-4 text-slate-100 hover:border-cyan-400/40 hover:bg-cyan-400/10"
           >
             Espace client
           </ButtonLink>
           <ButtonLink
             href="/#contact"
             size="sm"
-            className="bg-sky-500 text-white hover:bg-sky-400"
+            className="h-9 bg-gradient-to-r from-sky-500 to-cyan-400 px-4 text-slate-950 shadow-[0_0_30px_-10px_rgba(34,211,238,0.8)] hover:from-sky-400 hover:to-cyan-300"
           >
-            Demander un audit gratuit
+            Audit gratuit
           </ButtonLink>
         </div>
 
         <Button
           variant="ghost"
           size="icon"
-          className="text-slate-300 lg:hidden"
+          className="text-slate-200 xl:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
@@ -66,11 +86,11 @@ export function MarketingHeader() {
 
       <div
         className={cn(
-          "overflow-hidden border-t border-white/5 bg-[#0a0f1a] transition-all lg:hidden",
-          mobileOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
+          "overflow-hidden border-t border-white/10 bg-[#090f1a]/95 backdrop-blur-xl transition-all duration-300 xl:hidden",
+          mobileOpen ? "max-h-[30rem] opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <nav className="flex flex-col gap-1 px-4 py-4">
+        <nav className="flex flex-col gap-1 px-4 py-5">
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -81,20 +101,21 @@ export function MarketingHeader() {
               {item.label}
             </Link>
           ))}
-          <div className="mt-3 flex flex-col gap-2 border-t border-white/5 pt-4">
+          <div className="mt-3 flex flex-col gap-2 border-t border-white/10 pt-4">
             <ButtonLink
               href={CLIENT_PORTAL_URL}
               variant="outline"
-              className="w-full border-white/10 bg-transparent text-slate-200"
+              className="w-full border-white/15 bg-white/[0.03] text-slate-100"
+              onClick={() => setMobileOpen(false)}
             >
               Espace client
             </ButtonLink>
             <ButtonLink
               href="/#contact"
-              className="w-full bg-sky-500 text-white hover:bg-sky-400"
+              className="w-full bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950"
               onClick={() => setMobileOpen(false)}
             >
-              Demander un audit gratuit
+              Audit gratuit
             </ButtonLink>
           </div>
         </nav>

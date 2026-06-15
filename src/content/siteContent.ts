@@ -2,7 +2,7 @@ export const CLIENT_PORTAL_URL = "/login";
 
 export const company = {
   name: "PBG TELECOM",
-  tagline: "Votre sécurité, notre terrain depuis 2004",
+  tagline: "Expert sécurité & courants faibles depuis 2004",
   slogan: "Sécurisez sans compromis",
   founded: 2004,
   phone: "07 69 68 62 65",
@@ -38,11 +38,10 @@ export const seo = {
 } as const;
 
 export const navigation = [
-  { label: "Accueil", href: "/" },
   { label: "Services", href: "/#services" },
   { label: "Secteurs", href: "/#secteurs" },
-  { label: "Réalisations", href: "/#realisations" },
-  { label: "À propos", href: "/a-propos" },
+  { label: "Méthode", href: "/#methode" },
+  { label: "Espace client", href: "/#espace-client" },
   { label: "Contact", href: "/#contact" },
 ] as const;
 
@@ -54,19 +53,26 @@ export const footerLinks = [
 ] as const;
 
 export const hero = {
+  badge: "Expert sécurité & courants faibles depuis 2004",
   title: "Sécurisez vos bâtiments avec un expert terrain depuis 2004",
   subtitle:
-    "PBG TELECOM accompagne entreprises, commerces, syndics, bailleurs et particuliers dans l'installation, la maintenance et le suivi de solutions de vidéosurveillance, alarmes, contrôle d'accès, interphonie et réseaux courants faibles.",
+    "Vidéosurveillance, alarmes, contrôle d’accès, interphonie et réseaux courants faibles pour entreprises, syndics, commerces, bailleurs et particuliers.",
   ctaPrimary: "Demander un audit gratuit",
-  ctaSecondary: "Découvrir nos services",
+  ctaSecondary: "Voir nos services",
+  floatingCards: [
+    "+20 ans d'expertise",
+    "Audit gratuit",
+    "Maintenance & dépannage",
+    "Espace client sécurisé",
+  ],
 } as const;
 
 export const stats = [
-  { value: "2004", label: "Expertise depuis" },
-  { value: "+20 ans", label: "D'expérience terrain" },
-  { value: "Pro & particuliers", label: "Tous types de clients" },
-  { value: "IDF & PACA", label: "Zones d'intervention" },
-  { value: "360°", label: "Installation, maintenance, dépannage" },
+  { value: "Depuis 2004", label: "Expertise terrain continue" },
+  { value: "+20 ans d'expertise", label: "Solutions fiables et durables" },
+  { value: "Installation & maintenance", label: "Cycle complet de service" },
+  { value: "Syndics, commerces, entreprises", label: "Multi-secteurs B2B/B2C" },
+  { value: "Île-de-France & PACA", label: "Intervention nationale selon projet" },
 ] as const;
 
 export const services = [
@@ -75,32 +81,44 @@ export const services = [
     title: "Vidéosurveillance",
     description:
       "Installation de caméras adaptées aux commerces, immeubles, entrepôts, parkings et habitations. Accès à distance possible selon configuration.",
+    detail: "Couverture intelligente des zones sensibles",
     image: "/images/videosurveillance-placeholder.svg",
   },
   {
     id: "alarmes-intrusion",
-    title: "Alarmes intrusion",
+    title: "Alarme intrusion",
     description:
       "Protection des locaux contre les intrusions avec des systèmes fiables, évolutifs et adaptés au niveau de risque.",
+    detail: "Détection fiable et alerte réactive",
   },
   {
     id: "alarme-incendie",
     title: "Alarme incendie",
     description:
       "Installation et maintenance de solutions de sécurité incendie pour locaux professionnels et bâtiments collectifs.",
+    detail: "Conformité et continuité d'exploitation",
   },
   {
     id: "controle-acces",
     title: "Contrôle d'accès",
     description:
       "Badges, digicodes, interphones, accès sécurisés pour immeubles, bureaux et sites sensibles.",
+    detail: "Gestion fine des accès et des droits",
     image: "/images/controle-acces-placeholder.svg",
+  },
+  {
+    id: "interphonie",
+    title: "Interphonie",
+    description:
+      "Interphones audio et vidéo pour immeubles, résidences et sites professionnels avec intégration au contrôle d'accès.",
+    detail: "Communication sécurisée à l'entrée",
   },
   {
     id: "reseaux",
     title: "Réseaux & courants faibles",
     description:
       "Câblage, baie informatique, prises réseau, infrastructure télécom, déplacement de prises et installation d'éclairage.",
+    detail: "Infrastructure propre, évolutive et durable",
     image: "/images/reseaux-placeholder.svg",
   },
   {
@@ -108,17 +126,18 @@ export const services = [
     title: "Maintenance & dépannage",
     description:
       "Suivi technique, intervention rapide, diagnostic et remise en service des installations existantes.",
+    detail: "Support terrain et continuité de service",
     image: "/images/maintenance-placeholder.svg",
   },
 ] as const;
 
 export const whyChooseUs = [
   "Expertise terrain depuis 2004",
-  "Solutions sur mesure",
-  "Accompagnement de l'étude à l'installation",
-  "Maintenance et suivi long terme",
+  "Solutions adaptées au bâtiment",
+  "Installation propre et durable",
+  "Accompagnement de l'audit à la maintenance",
   "Intervention rapide",
-  "Expérience grands comptes, bailleurs, commerces et particuliers",
+  "Suivi client centralisé",
 ] as const;
 
 export const sectors = [
@@ -127,31 +146,31 @@ export const sectors = [
     description: "Vidéosurveillance, interphonie et contrôle d'accès pour copropriétés.",
   },
   {
-    title: "Bailleurs sociaux / OPHLM",
+    title: "Bailleurs sociaux",
     description: "Sécurisation des halls, parkings et espaces communs.",
   },
   {
-    title: "Commerces de proximité",
-    description: "Protection adaptée aux flux clients et aux horaires d'ouverture.",
+    title: "Commerces",
+    description: "Protection adaptée aux flux clients et contraintes d'exploitation.",
   },
   {
-    title: "Pharmacies, tabacs, boulangeries…",
-    description: "Alarmes, caméras et contrôle d'accès pour commerces sensibles.",
+    title: "Bureaux & entreprises",
+    description: "Contrôle d'accès, vidéosurveillance et sécurité globale des sites.",
   },
   {
-    title: "Entrepôts & locaux professionnels",
-    description: "Surveillance périmétrique et gestion des accès site.",
+    title: "Entrepôts",
+    description: "Surveillance périmétrique, supervision des accès et continuité des opérations.",
   },
   {
     title: "Particuliers",
-    description: "Alarmes, vidéosurveillance et interphonie pour habitations.",
+    description: "Solutions premium de protection résidentielle, discrètes et fiables.",
   },
 ] as const;
 
 export const saasSection = {
-  title: "Un espace client pour suivre vos installations et vos demandes",
+  title: "Un espace client pensé pour simplifier le suivi de vos installations",
   description:
-    "Le module compte client PBG TELECOM permet de centraliser les informations liées aux interventions, équipements, demandes et suivis. Il sera progressivement intégré pour faciliter la gestion entre PBG TELECOM et ses clients.",
+    "Centralisez vos demandes, vos équipements, vos interventions et vos documents dans un espace sécurisé relié aux services PBG TELECOM.",
   features: [
     "Accès sécurisé client",
     "Suivi des demandes",
@@ -165,11 +184,11 @@ export const saasSection = {
 
 export const processSteps = [
   { step: "01", title: "Audit gratuit", description: "Analyse de vos locaux et de vos enjeux de sécurité." },
-  { step: "02", title: "Étude du besoin", description: "Définition du niveau de risque et des contraintes terrain." },
-  { step: "03", title: "Proposition technique", description: "Devis détaillé avec solutions adaptées et évolutives." },
+  { step: "02", title: "Étude technique", description: "Définition du niveau de risque et des contraintes terrain." },
+  { step: "03", title: "Proposition adaptée", description: "Devis détaillé avec solutions adaptées et évolutives." },
   { step: "04", title: "Installation", description: "Pose professionnelle, câblage propre et configuration." },
   { step: "05", title: "Mise en service", description: "Tests, formation utilisateur et remise de documentation." },
-  { step: "06", title: "Maintenance & suivi", description: "Interventions, dépannage et suivi dans la durée." },
+  { step: "06", title: "Maintenance", description: "Interventions, dépannage et suivi dans la durée." },
 ] as const;
 
 export const realizations = [

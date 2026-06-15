@@ -11,7 +11,7 @@ Photorealistic premium corporate security technician installing CCTV cameras in 
 ## Vidéosurveillance (`videosurveillance.jpg`)
 
 ```
-Professional CCTV surveillance cameras installed on a modern building facade, premium security system, dark blue corporate tone, realistic, clean composition, no text, no logo
+Modern CCTV surveillance cameras installed on a premium commercial building facade, dark blue corporate lighting, realistic, clean composition, professional security company website image, no text, no logo
 ```
 
 ## Contrôle d'accès (`controle-acces.jpg`)
@@ -23,13 +23,19 @@ Close-up of modern access control keypad and badge reader on glass office entran
 ## Réseaux (`reseaux.jpg`)
 
 ```
-Clean telecom rack with structured network cabling, professional low voltage installation, modern IT infrastructure, dark premium lighting, realistic, no text, no logo
+Professional telecom rack with structured network cabling, clean low-voltage installation, modern IT infrastructure, dark premium lighting, realistic, no text, no logo
 ```
 
 ## Maintenance (`maintenance.jpg`)
 
 ```
-Security technician checking alarm and surveillance system with tablet, professional maintenance intervention, modern building, realistic corporate style, no text, no logo
+Security technician checking alarm and surveillance system with tablet, professional maintenance intervention, modern building, realistic corporate style, dark navy tones, no text, no logo
+```
+
+## Mockup espace client (`portal-mockup.jpg`)
+
+```
+Modern dark SaaS dashboard interface for a security company customer portal, intervention tracking, equipment list, documents, premium blue accent, realistic web app mockup, no readable text, no logo
 ```
 
 ## Instructions

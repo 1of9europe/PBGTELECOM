@@ -12,18 +12,18 @@ export function FaqSection() {
         {faq.map((item) => (
           <details
             key={item.question}
-            className="group rounded-xl border border-white/10 bg-[#111827]/60 open:border-sky-500/20"
+            className="group rounded-2xl border border-white/10 bg-[#0f182a]/75 open:border-cyan-400/25"
           >
-            <summary className="cursor-pointer list-none px-6 py-4 text-sm font-medium text-white transition-colors marker:content-none [&::-webkit-details-marker]:hidden">
+            <summary className="cursor-pointer list-none px-6 py-4 text-sm font-medium text-white transition-colors marker:content-none hover:text-cyan-100 [&::-webkit-details-marker]:hidden">
               <span className="flex items-center justify-between gap-4">
                 {item.question}
-                <span className="shrink-0 text-sky-400 transition-transform group-open:rotate-45">
+                <span className="shrink-0 text-cyan-300 transition-transform group-open:rotate-45">
                   +
                 </span>
               </span>
             </summary>
             <div className="border-t border-white/5 px-6 py-4">
-              <p className="text-sm leading-relaxed text-slate-400">{item.answer}</p>
+              <p className="text-sm leading-relaxed text-slate-300/90">{item.answer}</p>
             </div>
           </details>
         ))}
