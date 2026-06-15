@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -108,12 +108,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -206,7 +206,7 @@ model MaintenanceContract {
   id                  String         @id @default(cuid())
   customerId          String
   name                String
-  monthlyPrice        Decimal        @db.Decimal(10, 2)
+  monthlyPrice        Decimal
   startDate           DateTime
   endDate             DateTime?
   status              ContractStatus @default(ACTIVE)
@@ -281,7 +281,7 @@ model Subscription {
   id                   String             @id @default(cuid())
   customerId           String
   planName             String
-  priceMonthly         Decimal            @db.Decimal(10, 2)
+  priceMonthly         Decimal
   status               SubscriptionStatus @default(ACTIVE)
   stripeCustomerId     String?
   stripeSubscriptionId String?

@@ -6,8 +6,8 @@ import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ClipboardList } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { toast } from "sonner";
 
 export function LoginForm() {
@@ -43,13 +43,10 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md border-border/60 shadow-xl">
       <CardHeader className="space-y-4 text-center">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
-          <ClipboardList className="h-7 w-7" />
+        <div className="mx-auto flex justify-center">
+          <BrandLogo tone="blue" size="lg" priority />
         </div>
-        <div>
-          <CardTitle className="text-2xl">PBG TELECOM</CardTitle>
-          <CardDescription>Plateforme de gestion SAV & maintenance</CardDescription>
-        </div>
+        <CardDescription>Plateforme de gestion SAV & maintenance</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -1,8 +1,9 @@
-import { auth } from "@/lib/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "@/lib/auth.config";
 import { NextResponse } from "next/server";
 import { Role } from "@prisma/client";
 
-const publicRoutes = ["/login", "/api/auth"];
+const { auth } = NextAuth(authConfig);
 
 const adminOnlyPrefixes = ["/dashboard/customers", "/dashboard/subscriptions"];
 
@@ -11,9 +12,8 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth;
   const pathname = nextUrl.pathname;
 
-  const isPublic = publicRoutes.some(
-    (route) => pathname === route || pathname.startsWith(`${route}/`)
-  );
+  const isPublic =
+    pathname === "/login" || pathname.startsWith("/api/auth");
 
   if (isPublic) {
     if (isLoggedIn && pathname === "/login") {

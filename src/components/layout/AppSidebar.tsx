@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   Building2,
   Camera,
-  ClipboardList,
   CreditCard,
   FileText,
   LayoutDashboard,
@@ -15,6 +14,7 @@ import {
   Ticket,
   Wrench,
 } from "lucide-react";
+import { ThemeBrandLogo } from "@/components/shared/ThemeBrandLogo";
 import { cn } from "@/lib/utils";
 import { buttonVariants, Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -114,9 +114,8 @@ export function AppSidebar({ user }: AppSidebarProps) {
             <SidebarContent user={user} mobile />
           </SheetContent>
         </Sheet>
-        <div className="ml-3">
-          <p className="text-sm font-semibold">PBG TELECOM</p>
-          <p className="text-xs text-muted-foreground">Plateforme SAV</p>
+        <div className="ml-3 flex min-w-0 flex-1">
+          <ThemeBrandLogo size="sm" />
         </div>
       </div>
     </>
@@ -128,15 +127,8 @@ function SidebarContent({ user, mobile }: AppSidebarProps & { mobile?: boolean }
     <div className="flex h-full flex-col p-4">
       {!mobile && (
         <div className="mb-6 px-2">
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <ClipboardList className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold tracking-tight">PBG TELECOM</p>
-              <p className="text-xs text-muted-foreground">Gestion SAV & Maintenance</p>
-            </div>
-          </div>
+          <ThemeBrandLogo size="md" />
+          <p className="mt-2 text-xs text-muted-foreground">Gestion SAV & Maintenance</p>
         </div>
       )}
 

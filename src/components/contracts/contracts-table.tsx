@@ -3,23 +3,15 @@
 import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/shared/DataTable";
-import { StatusBadge, getContractStatusVariant } from "@/components/shared/StatusBadge";
+import { getContractStatusVariant, StatusBadge } from "@/components/shared/StatusBadge";
 import { DeleteButton } from "@/components/shared/DeleteButton";
 import { ButtonLink } from "@/components/ui/button-link";
 import { CONTRACT_STATUS_LABELS } from "@/types";
-import { deleteContract } from "@/lib/actions/contracts";
+import { deleteContract, getContracts } from "@/lib/actions/contracts";
 import { formatCurrency, formatDate } from "@/lib/filters";
 import { Pencil } from "lucide-react";
 
-export type ContractRow = {
-  id: string;
-  name: string;
-  monthlyPrice: { toString(): string };
-  startDate: Date;
-  endDate: Date | null;
-  status: string;
-  customer: { companyName: string };
-};
+export type ContractRow = Awaited<ReturnType<typeof getContracts>>[number];
 
 const columns: ColumnDef<ContractRow>[] = [
   {

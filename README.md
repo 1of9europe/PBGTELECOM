@@ -8,7 +8,7 @@ Plateforme B2B pour **PBG TELECOM** : gestion clients, sites, équipements tél�
 
 - **Next.js 15** (App Router, TypeScript strict)
 - **Tailwind CSS 4** + **Shadcn UI**
-- **Prisma** + **PostgreSQL**
+- **Prisma** + **SQLite** (dev local) / **PostgreSQL** (production)
 - **Auth.js (NextAuth v5)** — authentification credentials + RBAC
 - **Zod** — validation des formulaires
 - **TanStack Table** — tableaux de données
@@ -16,7 +16,8 @@ Plateforme B2B pour **PBG TELECOM** : gestion clients, sites, équipements tél�
 ## Prérequis
 
 - Node.js 20+
-- Docker (pour PostgreSQL local) ou une instance PostgreSQL distante
+- **Dev local :** rien d'autre (SQLite embarqué)
+- **Production :** Docker ou PostgreSQL managé (Neon, Supabase, etc.)
 
 ## Installation
 
@@ -29,6 +30,27 @@ npm install
 # 2. Configurer l'environnement
 cp .env.example .env
 
+# 3. Créer la base SQLite et charger les données de démo
+npm run setup
+
+# 4. Lancer le serveur de développement
+npm run dev
+```
+
+Ouvrir [http://localhost:3000/login](http://localhost:3000/login)
+
+### PostgreSQL (optionnel — production ou Docker)
+
+Si vous préférez PostgreSQL en local :
+
+1. Dans `prisma/schema.prisma`, remplacez `provider = "sqlite"` par `provider = "postgresql"`
+2. Dans `.env`, utilisez : `DATABASE_URL="postgresql://pbg:pbg_secret@localhost:5432/pbgtelecom?schema=public"`
+3. Lancez `docker compose up -d`, puis `npm run db:migrate && npm run db:seed`
+
+<details>
+<summary>Ancienne procédure Docker-only (archivée)</summary>
+
+```bash
 # 3. Démarrer PostgreSQL (Docker)
 docker compose up -d
 
@@ -40,7 +62,7 @@ npm run db:seed
 npm run dev
 ```
 
-Ouvrir [http://localhost:3000](http://localhost:3000)
+</details>
 
 ## Variables d'environnement
 
