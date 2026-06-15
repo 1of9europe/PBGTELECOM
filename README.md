@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PBG TELECOM — Plateforme SaaS SAV & Maintenance
 
-## Getting Started
+Plateforme B2B pour **PBG TELECOM** : gestion clients, sites, équipements télécom/sécurité, tickets SAV, interventions terrain, contrats de maintenance et abonnements.
 
-First, run the development server:
+**Dépôt GitHub :** [https://github.com/1of9europe/PBGTELECOM](https://github.com/1of9europe/PBGTELECOM)
+
+## Stack
+
+- **Next.js 15** (App Router, TypeScript strict)
+- **Tailwind CSS 4** + **Shadcn UI**
+- **Prisma** + **PostgreSQL**
+- **Auth.js (NextAuth v5)** — authentification credentials + RBAC
+- **Zod** — validation des formulaires
+- **TanStack Table** — tableaux de données
+
+## Prérequis
+
+- Node.js 20+
+- Docker (pour PostgreSQL local) ou une instance PostgreSQL distante
+
+## Installation
 
 ```bash
+# 1. Cloner le dépôt et installer les dépendances
+git clone https://github.com/1of9europe/PBGTELECOM.git
+cd PBGTELECOM
+npm install
+
+# 2. Configurer l'environnement
+cp .env.example .env
+
+# 3. Démarrer PostgreSQL (Docker)
+docker compose up -d
+
+# 4. Appliquer le schéma et seed
+npm run db:migrate
+npm run db:seed
+
+# 5. Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | URL PostgreSQL (`postgresql://pbg:pbg_secret@localhost:5432/pbgtelecom`) |
+| `AUTH_SECRET` | Secret Auth.js — générer avec `openssl rand -base64 32` |
+| `AUTH_URL` | URL de l'app (`http://localhost:3000`) |
+| `STRIPE_SECRET_KEY` | (Futur) Clé secrète Stripe |
+| `STRIPE_WEBHOOK_SECRET` | (Futur) Webhook Stripe |
 
-## Learn More
+## Commandes Prisma
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run db:generate   # Générer le client Prisma
+npm run db:migrate    # Créer/appliquer les migrations
+npm run db:push       # Push schema sans migration (dev rapide)
+npm run db:seed       # Peupler avec des données de démo
+npm run db:studio     # Interface Prisma Studio
+npm run db:reset      # Reset DB + seed
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Comptes de test
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Mot de passe pour tous : **`Password123!`**
 
-## Deploy on Vercel
+| Rôle | Email |
+|------|-------|
+| Super Admin | `admin@pbgtelecom.fr` |
+| Admin | `sophie@pbgtelecom.fr` |
+| Technicien | `karim@pbgtelecom.fr` |
+| Technicien | `thomas@pbgtelecom.fr` |
+| Client (Syndic) | `client@oliviers-syndic.fr` |
+| Client (Commerce) | `client@boulangerie-martin.fr` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Rôles & permissions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Rôle | Accès |
+|------|-------|
+| **SUPER_ADMIN** | Accès total |
+| **ADMIN** | Gestion interne complète |
+| **TECHNICIAN** | Interventions assignées, équipements, tickets assignés |
+| **CUSTOMER** | Ses sites, équipements, tickets et contrats uniquement |
+
+## Architecture
+
+```
+src/
+├── app/
+│   ├── api/auth/          # Routes Auth.js
+│   ├── dashboard/         # Pages protégées MVP
+│   └── login/
+├── components/
+│   ├── layout/            # AppSidebar
+│   ├── dashboard/         # DashboardCard
+│   ├── shared/            # DataTable, StatusBadge, PageHeader
+│   └── [entity]/          # Tables & formulaires par entité
+├── lib/
+│   ├── actions/           # Server Actions CRUD
+│   ├── auth.ts            # Config Auth.js
+│   ├── filters.ts         # Multi-tenant & formatage
+│   ├── permissions.ts     # RBAC helpers
+│   └── validations/       # Schémas Zod
+├── prisma/                # Schéma + seed
+└── types/
+```
+
+## Fonctionnalités MVP
+
+- Dashboard KPIs (clients, tickets, interventions, contrats, MRR)
+- CRUD complet : clients, sites, équipements, tickets, interventions, contrats, abonnements
+- Sidebar responsive (desktop + mobile sheet)
+- Thème sombre/clair (bleu électrique PBG)
+- Badges de statut, empty states, toasts
+- Multi-tenant simple via `customerId` sur l'utilisateur CUSTOMER
+
+## Prochaines évolutions
+
+1. **Monitoring caméra/NVR** — ping IP, alertes offline, dashboard temps réel
+2. **Intégration Stripe** — facturation abonnements, webhooks, portail client
+3. **Notifications** — email/SMS sur tickets urgents et interventions
+4. **App mobile technicien** — PWA offline, signature client, photos
+5. **Rapports PDF** — comptes-rendus d'intervention exportables
+6. **API REST** — intégration ERP/comptabilité
+7. **Audit log** — traçabilité des modifications
+
+## Dépôt Git
+
+| Commande | Description |
+|----------|-------------|
+| `git clone https://github.com/1of9europe/PBGTELECOM.git` | Cloner le projet |
+| `git remote -v` | Vérifier le remote `origin` |
+| `git pull origin main` | Récupérer les dernières modifications |
+
+Remote configuré :
+
+```text
+origin  https://github.com/1of9europe/PBGTELECOM.git
+```
+
+## Licence
+
+Propriétaire — PBG TELECOM © 2024

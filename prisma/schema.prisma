@@ -1,0 +1,296 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  TECHNICIAN
+  CUSTOMER
+}
+
+enum CustomerType {
+  SYNDIC
+  COMPANY
+  SHOP
+  INDIVIDUAL
+}
+
+enum CustomerStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum EquipmentType {
+  CAMERA
+  NVR
+  DVR
+  ACCESS_CONTROL
+  ROUTER
+  SWITCH
+  OTHER
+}
+
+enum EquipmentStatus {
+  ONLINE
+  OFFLINE
+  UNKNOWN
+  MAINTENANCE
+}
+
+enum ContractStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING_CUSTOMER
+  RESOLVED
+  CLOSED
+}
+
+enum InterventionStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  role          Role      @default(CUSTOMER)
+  customerId    String?
+  customer      Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  accounts Account[]
+  sessions Session[]
+
+  createdTickets  Ticket[]       @relation("CreatedTickets")
+  assignedTickets Ticket[]       @relation("AssignedTickets")
+  interventions   Intervention[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+  @@index([role])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Customer {
+  id          String         @id @default(cuid())
+  companyName String
+  contactName String
+  email       String
+  phone       String
+  address     String
+  type        CustomerType
+  status      CustomerStatus @default(ACTIVE)
+
+  sites         Site[]
+  contracts     MaintenanceContract[]
+  tickets       Ticket[]
+  subscriptions Subscription[]
+  users         User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([type])
+}
+
+model Site {
+  id                 String @id @default(cuid())
+  customerId         String
+  name               String
+  address            String
+  accessInstructions String @default("")
+  notes              String @default("")
+
+  customer    Customer     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  equipment   Equipment[]
+  tickets     Ticket[]
+  interventions Intervention[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+}
+
+model Equipment {
+  id              String          @id @default(cuid())
+  siteId          String
+  type            EquipmentType
+  brand           String
+  model           String
+  serialNumber    String          @default("")
+  ipAddress       String?
+  installDate     DateTime?
+  warrantyEndDate DateTime?
+  status          EquipmentStatus @default(UNKNOWN)
+  notes           String          @default("")
+
+  site    Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  tickets Ticket[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([siteId])
+  @@index([status])
+}
+
+model MaintenanceContract {
+  id                  String         @id @default(cuid())
+  customerId          String
+  name                String
+  monthlyPrice        Decimal        @db.Decimal(10, 2)
+  startDate           DateTime
+  endDate             DateTime?
+  status              ContractStatus @default(ACTIVE)
+  includedVisitsPerYear Int          @default(2)
+  responseTimeHours   Int            @default(24)
+  notes               String         @default("")
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+  @@index([status])
+}
+
+model Ticket {
+  id           String         @id @default(cuid())
+  customerId   String
+  siteId       String
+  equipmentId  String?
+  title        String
+  description  String
+  priority     TicketPriority @default(MEDIUM)
+  status       TicketStatus   @default(OPEN)
+  createdById  String
+  assignedToId String?
+
+  customer   Customer   @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  site       Site       @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  equipment  Equipment? @relation(fields: [equipmentId], references: [id], onDelete: SetNull)
+  createdBy  User       @relation("CreatedTickets", fields: [createdById], references: [id])
+  assignedTo User?      @relation("AssignedTickets", fields: [assignedToId], references: [id], onDelete: SetNull)
+  interventions Intervention[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+  @@index([siteId])
+  @@index([status])
+  @@index([priority])
+  @@index([assignedToId])
+}
+
+model Intervention {
+  id                String             @id @default(cuid())
+  ticketId          String?
+  siteId            String
+  technicianId      String
+  scheduledAt       DateTime
+  startedAt         DateTime?
+  completedAt       DateTime?
+  status            InterventionStatus @default(PLANNED)
+  report            String             @default("")
+  customerSignature String?
+
+  ticket     Ticket? @relation(fields: [ticketId], references: [id], onDelete: SetNull)
+  site       Site    @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  technician User    @relation(fields: [technicianId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([siteId])
+  @@index([technicianId])
+  @@index([status])
+  @@index([scheduledAt])
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  customerId           String
+  planName             String
+  priceMonthly         Decimal            @db.Decimal(10, 2)
+  status               SubscriptionStatus @default(ACTIVE)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+  @@index([status])
+}
