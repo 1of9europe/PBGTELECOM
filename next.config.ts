@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["@prisma/client", ".prisma/client", "pg"],
+  images: {
+    unoptimized: true,
+  },
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "@tanstack/react-table",
+      "date-fns",
+    ],
+  },
   turbopack: {
     root: process.cwd(),
   },

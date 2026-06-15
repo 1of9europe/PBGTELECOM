@@ -1,9 +1,10 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
-// Fallback pour `prisma generate` en CI (Cloudflare build) quand DATABASE_URL
-// n'est pas encore injectée — generate n'ouvre pas de connexion réelle.
+// Migrations/seed utilisent la connexion directe PostgreSQL.
+// L'app runtime (Workers) utilise DATABASE_URL = URL Prisma Accelerate.
 const databaseUrl =
+  process.env.DIRECT_DATABASE_URL ??
   process.env.DATABASE_URL ??
   "postgresql://placeholder:placeholder@localhost:5432/placeholder?schema=public";
 

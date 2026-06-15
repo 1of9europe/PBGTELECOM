@@ -89,14 +89,17 @@ Dans le [dashboard Cloudflare](https://dash.cloudflare.com) → **Workers & Page
 
 | Variable | Valeur | Type |
 |----------|--------|------|
-| `DATABASE_URL` | `postgresql://...` | **Secret** |
+| `DATABASE_URL` | `prisma+postgres://...` (URL **Accelerate**) | **Secret** |
 | `AUTH_SECRET` | clé générée avec openssl | **Secret** |
 | `AUTH_URL` | `https://pbgtelecom.fr` | Variable |
 | `NEXT_PUBLIC_SITE_URL` | `https://pbgtelecom.fr` | Variable |
 | `STRIPE_SECRET_KEY` | (vide ou clé Stripe) | Secret |
 | `STRIPE_WEBHOOK_SECRET` | (vide ou secret webhook) | Secret |
 
-> **Build CI :** si vous déployez via GitHub, ajoutez aussi `DATABASE_URL` dans les **Build environment variables** du projet Cloudflare. Cela évite l'erreur `Missing required environment variable: DATABASE_URL` pendant `prisma generate` au build.
+> **Important :** `DATABASE_URL` en production doit être l'URL **Prisma Accelerate** (`prisma+postgres://...`), pas la connexion directe PostgreSQL.  
+> Récupérez-la dans [console.prisma.io](https://console.prisma.io) → votre base → **Enable Accelerate** → copier l'URL Accelerate.
+
+> **Build CI :** ajoutez un placeholder `DATABASE_URL=postgresql://placeholder:placeholder@localhost:5432/placeholder` dans les variables de build (le fallback `prisma.config.ts` suffit aussi pour `prisma generate`).
 
 ---
 
@@ -247,6 +250,22 @@ npm run deploy
 
 - Vérifiez `nodejs_compat` dans `wrangler.jsonc`
 - Vérifiez que `@prisma/client` est dans `serverExternalPackages` (`next.config.ts`)
+
+### Worker size limit exceeded (code 10027)
+
+Une app Next.js fullstack (Prisma + Auth + dashboard) pèse environ **4 Mo gzip**, au-dessus de la limite **gratuite de 3 Mo** de Cloudflare Workers.
+
+**Solution recommandée :** passer au plan **Workers Paid** (~5 $/mois) → limite **10 Mo gzip**.  
+[Cloudflare Workers Plans](https://developers.cloudflare.com/workers/platform/pricing/)
+
+Le projet utilise **Prisma Accelerate** (HTTP) pour éviter le driver `pg` dans le Worker — c'est la config la plus légère possible pour Prisma sur Workers.
+
+**Variables `.env` locales :**
+
+```env
+DATABASE_URL="prisma+postgres://..."      # Accelerate — pour l'app (dev + prod Workers)
+DIRECT_DATABASE_URL="postgresql://..."  # Direct — pour migrate / seed / studio
+```
 
 ---
 

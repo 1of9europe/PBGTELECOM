@@ -1,20 +1,32 @@
 import { cache } from "react";
 import { PrismaClient } from "../../generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { withAccelerate } from "@prisma/extension-accelerate";
 
-/**
- * Client Prisma par requête (requis sur Cloudflare Workers / OpenNext).
- * cache() garantit une seule instance par requête HTTP.
- */
-export const getPrisma = cache(() => {
-  const connectionString = process.env.DATABASE_URL;
+function resolveAccelerateUrl(): string {
+  const url = process.env.DATABASE_URL;
 
-  if (!connectionString) {
+  if (!url) {
     throw new Error("DATABASE_URL is not defined");
   }
 
-  const adapter = new PrismaPg({ connectionString, maxUses: 1 });
-  return new PrismaClient({ adapter });
+  if (url.startsWith("prisma+") || url.startsWith("prisma://")) {
+    return url;
+  }
+
+  throw new Error(
+    "DATABASE_URL must be a Prisma Accelerate URL (prisma+postgres://...) for Cloudflare Workers. " +
+      "Enable Accelerate in console.prisma.io and use DIRECT_DATABASE_URL for migrations/seed."
+  );
+}
+
+/**
+ * Client Prisma via Accelerate (HTTP) — compatible Cloudflare Workers, sans driver pg.
+ */
+export const getPrisma = cache(() => {
+  const accelerateUrl = resolveAccelerateUrl();
+  return new PrismaClient({ accelerateUrl }).$extends(
+    withAccelerate()
+  ) as unknown as PrismaClient;
 });
 
 /** Accès lazy — délègue à getPrisma() à chaque appel. */

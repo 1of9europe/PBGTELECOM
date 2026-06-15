@@ -3,9 +3,11 @@ import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 async function main() {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString =
+    process.env.DIRECT_DATABASE_URL ?? process.env.DATABASE_URL;
+
   if (!connectionString) {
-    throw new Error("DATABASE_URL is not defined");
+    throw new Error("DIRECT_DATABASE_URL or DATABASE_URL is not defined");
   }
 
   const adapter = new PrismaPg({ connectionString, maxUses: 1 });
