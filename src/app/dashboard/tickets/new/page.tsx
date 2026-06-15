@@ -4,7 +4,7 @@ import { getTechnicianOptions } from "@/lib/actions/tickets";
 import { TicketForm } from "@/components/tickets/ticket-form";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { requireAuth } from "@/lib/session";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export default async function NewTicketPage() {
   const user = await requireAuth();

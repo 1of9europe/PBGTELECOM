@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import { authConfig } from "@/lib/auth.config";
 import { NextResponse } from "next/server";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 import { getDefaultRouteByRole } from "@/lib/navigation";
 
 const { auth } = NextAuth(authConfig);

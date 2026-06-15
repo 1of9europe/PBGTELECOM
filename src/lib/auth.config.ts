@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
+import type { Role } from "@/generated/prisma/enums";
 import { getDefaultRouteByRole } from "@/lib/navigation";
 
 export const authConfig = {

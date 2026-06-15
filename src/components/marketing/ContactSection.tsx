@@ -29,13 +29,14 @@ export function ContactSection() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
     setPending(true);
 
     try {
-      const formData = new FormData(e.currentTarget);
+      const formData = new FormData(form);
       await submitContactForm(formData);
       toast.success("Demande envoyée ! Nous vous recontacterons rapidement.");
-      e.currentTarget.reset();
+      form.reset();
     } catch {
       toast.error("Une erreur est survenue. Veuillez réessayer ou nous appeler.");
     } finally {

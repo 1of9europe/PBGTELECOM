@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export function getDefaultRouteByRole(role?: Role | null) {
   if (role === Role.CUSTOMER) {

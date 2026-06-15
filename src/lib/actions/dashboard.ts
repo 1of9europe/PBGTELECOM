@@ -9,7 +9,7 @@ import {
   ticketScope,
 } from "@/lib/filters";
 import { isAdmin } from "@/lib/permissions";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export async function getDashboardStats() {
   const user = await requireAuth();

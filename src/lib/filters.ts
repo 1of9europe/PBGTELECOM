@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 import { isAdmin } from "@/lib/permissions";
 import type { SessionUser } from "@/lib/permissions";
 

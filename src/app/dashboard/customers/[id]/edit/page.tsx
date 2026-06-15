@@ -3,7 +3,7 @@ import { getCustomer } from "@/lib/actions/customers";
 import { CustomerForm } from "@/components/customers/customer-form";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { requireRole } from "@/lib/session";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export default async function EditCustomerPage({ params }: { params: Promise<{ id: string }> }) {
   await requireRole([Role.SUPER_ADMIN, Role.ADMIN]);

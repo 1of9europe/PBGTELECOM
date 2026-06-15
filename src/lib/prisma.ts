@@ -1,40 +1,31 @@
-import { PrismaClient } from "@prisma/client";
+import { cache } from "react";
+import { PrismaClient } from "../../generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
+/**
+ * Client Prisma par requête (requis sur Cloudflare Workers / OpenNext).
+ * cache() garantit une seule instance par requête HTTP.
+ */
+export const getPrisma = cache(() => {
+  const connectionString = process.env.DATABASE_URL;
 
-/** SQLite : chemin absolu depuis la racine du projet (runtime Node.js uniquement). */
-function resolveDatabaseUrl(): string {
-  const url = process.env.DATABASE_URL;
-
-  if (!url) {
+  if (!connectionString) {
     throw new Error("DATABASE_URL is not defined");
   }
 
-  if (!url.startsWith("file:")) {
-    return url;
-  }
+  const adapter = new PrismaPg({ connectionString, maxUses: 1 });
+  return new PrismaClient({ adapter });
+});
 
-  const filePath = url.slice("file:".length);
+/** Accès lazy — délègue à getPrisma() à chaque appel. */
+export const prisma: PrismaClient = new Proxy({} as PrismaClient, {
+  get(_target, prop) {
+    const client = getPrisma();
+    const value = client[prop as keyof PrismaClient];
+    return typeof value === "function"
+      ? (value as (...args: unknown[]) => unknown).bind(client)
+      : value;
+  },
+});
 
-  if (filePath.startsWith("/")) {
-    return url;
-  }
-
-  const relative = filePath.replace(/^\.\//, "");
-  return `file:${process.cwd()}/prisma/${relative}`;
-}
-
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    datasources: {
-      db: { url: resolveDatabaseUrl() },
-    },
-    log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-  });
-
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
-}
+export default prisma;

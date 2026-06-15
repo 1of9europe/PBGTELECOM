@@ -1,7 +1,14 @@
-import { PrismaClient, Role } from "@prisma/client";
+import { PrismaClient, Role } from "../generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
 
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error("DATABASE_URL is not defined");
+}
+
+const adapter = new PrismaPg({ connectionString, maxUses: 1 });
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log("🌱 Seed PBG TELECOM...");

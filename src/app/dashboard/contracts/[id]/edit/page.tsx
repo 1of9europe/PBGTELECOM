@@ -4,7 +4,7 @@ import { getCustomerOptions } from "@/lib/actions/customers";
 import { ContractForm } from "@/components/contracts/contract-form";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { requireRole } from "@/lib/session";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export default async function EditContractPage({ params }: { params: Promise<{ id: string }> }) {
   await requireRole([Role.SUPER_ADMIN, Role.ADMIN]);

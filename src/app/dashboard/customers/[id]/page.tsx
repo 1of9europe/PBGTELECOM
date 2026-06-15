@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ButtonLink } from "@/components/ui/button-link";
 import { CUSTOMER_STATUS_LABELS, CUSTOMER_TYPE_LABELS } from "@/types";
 import { requireRole } from "@/lib/session";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export default async function CustomerDetailPage({ params }: { params: Promise<{ id: string }> }) {
   await requireRole([Role.SUPER_ADMIN, Role.ADMIN]);

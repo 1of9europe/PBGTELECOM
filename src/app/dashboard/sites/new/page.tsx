@@ -2,7 +2,7 @@ import { getCustomerOptions } from "@/lib/actions/customers";
 import { SiteForm } from "@/components/sites/site-form";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { requireRole } from "@/lib/session";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export default async function NewSitePage() {
   await requireRole([Role.SUPER_ADMIN, Role.ADMIN]);

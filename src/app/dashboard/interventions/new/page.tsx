@@ -4,7 +4,7 @@ import { InterventionForm } from "@/components/interventions/intervention-form";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { requireAuth } from "@/lib/session";
 import { isInternal } from "@/lib/permissions";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 import { redirect } from "next/navigation";
 
 export default async function NewInterventionPage() {

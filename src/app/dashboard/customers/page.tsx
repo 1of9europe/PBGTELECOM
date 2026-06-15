@@ -5,7 +5,7 @@ import { EmptyState } from "@/components/shared/EmptyState";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { ButtonLink } from "@/components/ui/button-link";
 import { requireRole } from "@/lib/session";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export default async function CustomersPage() {
   await requireRole([Role.SUPER_ADMIN, Role.ADMIN]);

@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+.open-next/
 
 # production
 /build
@@ -36,10 +37,12 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.dev.vars
 !.env.example
 
 # vercel
 .vercel
+.wrangler/
 
 # typescript
 *.tsbuildinfo
@@ -47,4 +50,4 @@ next-env.d.ts
 
 prisma/dev.db
 prisma/dev.db-journal
-/src/generated/prisma
+/generated/

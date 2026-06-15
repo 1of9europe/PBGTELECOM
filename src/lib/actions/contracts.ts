@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { requireAuth, requireRole } from "@/lib/session";
 import { contractSchema } from "@/lib/validations";
 import { customerLinkedScope, parseOptionalDate, contains } from "@/lib/filters";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 type ActionResult = { success: true } | { success: false; error: string };
 

@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants, Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 import { ROLE_LABELS } from "@/types";
 import { signOut } from "next-auth/react";
 

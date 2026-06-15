@@ -5,7 +5,7 @@ import { getSiteOptions } from "@/lib/actions/sites";
 import { TicketForm } from "@/components/tickets/ticket-form";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { requireAuth } from "@/lib/session";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 
 export default async function EditTicketPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requireAuth();

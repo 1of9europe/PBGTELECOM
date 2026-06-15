@@ -9,7 +9,7 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { createCustomer, updateCustomer } from "@/lib/actions/customers";
-import type { Customer } from "@prisma/client";
+import type { Customer } from "@/generated/prisma/browser";
 
 type CustomerFormProps = {
   customer?: Customer;

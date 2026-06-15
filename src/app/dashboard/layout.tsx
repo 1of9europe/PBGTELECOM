@@ -1,6 +1,6 @@
 import { requireAuth } from "@/lib/session";
 import { AppSidebar } from "@/components/layout/AppSidebar";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { privateAreaRobots } from "@/lib/seo";

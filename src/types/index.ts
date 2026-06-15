@@ -1,4 +1,4 @@
-export * from "@prisma/client";
+export * from "@/generated/prisma/browser";
 
 export const CUSTOMER_TYPE_LABELS: Record<string, string> = {
   SYNDIC: "Syndic",

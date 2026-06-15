@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 import { redirect } from "next/navigation";
 import type { SessionUser } from "@/lib/permissions";
 import { getDefaultRouteByRole } from "@/lib/navigation";

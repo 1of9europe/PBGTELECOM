@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { Role } from "@prisma/client";
+import { Role } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import { requireCustomer } from "@/lib/session";
 import { clientRequestSchema } from "@/lib/validations";
@@ -12,7 +12,7 @@ type ActionResult = { success: true } | { success: false; error: string };
 export async function getClientContext() {
   const user = await requireCustomer();
   const customer = await prisma.customer.findUnique({
-    where: { id: user.customerId },
+    where: { id: user.customerId! },
     select: { id: true, companyName: true, contactName: true, email: true, phone: true, address: true },
   });
 
