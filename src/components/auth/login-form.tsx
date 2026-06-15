@@ -14,7 +14,7 @@ import { toast } from "sonner";
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/auth/redirect";
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 

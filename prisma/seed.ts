@@ -7,6 +7,7 @@ async function main() {
   console.log("🌱 Seed PBG TELECOM...");
 
   await prisma.intervention.deleteMany();
+  await prisma.clientDocument.deleteMany();
   await prisma.ticket.deleteMany();
   await prisma.equipment.deleteMany();
   await prisma.maintenanceContract.deleteMany();
@@ -274,6 +275,29 @@ async function main() {
         planName: "Supervision réseau 24/7",
         priceMonthly: 99.0,
         status: "ACTIVE",
+      },
+    ],
+  });
+
+  await prisma.clientDocument.createMany({
+    data: [
+      {
+        customerId: syndic.id,
+        title: "Devis modernisation vidéoprotection 2026",
+        type: "QUOTE",
+        fileUrl: "/mock/documents/devis-modernisation-2026.pdf",
+      },
+      {
+        customerId: syndic.id,
+        title: "Contrat maintenance premium",
+        type: "CONTRACT",
+        fileUrl: "/mock/documents/contrat-premium.pdf",
+      },
+      {
+        customerId: entreprise.id,
+        title: "Facture maintenance avril 2026",
+        type: "INVOICE",
+        fileUrl: "/mock/documents/facture-avril-2026.pdf",
       },
     ],
   });

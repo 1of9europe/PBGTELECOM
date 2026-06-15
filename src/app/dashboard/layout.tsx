@@ -1,5 +1,7 @@
 import { requireAuth } from "@/lib/session";
 import { AppSidebar } from "@/components/layout/AppSidebar";
+import { Role } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
   children,
@@ -7,6 +9,9 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const user = await requireAuth();
+  if (user.role === Role.CUSTOMER) {
+    redirect("/client/dashboard");
+  }
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">

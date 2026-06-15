@@ -77,6 +77,15 @@ enum SubscriptionStatus {
   CANCELLED
 }
 
+enum ClientDocumentType {
+  QUOTE
+  INVOICE
+  CONTRACT
+  INTERVENTION_REPORT
+  PROJECT_DOCUMENT
+  OTHER
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -151,6 +160,7 @@ model Customer {
   contracts     MaintenanceContract[]
   tickets       Ticket[]
   subscriptions Subscription[]
+  documents     ClientDocument[]
   users         User[]
 
   createdAt DateTime @default(now())
@@ -293,4 +303,19 @@ model Subscription {
 
   @@index([customerId])
   @@index([status])
+}
+
+model ClientDocument {
+  id         String             @id @default(cuid())
+  customerId String
+  title      String
+  type       ClientDocumentType @default(OTHER)
+  fileUrl    String
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([customerId])
+  @@index([type])
 }

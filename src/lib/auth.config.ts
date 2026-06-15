@@ -1,5 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
-import { Role } from "@prisma/client";
+import { getDefaultRouteByRole } from "@/lib/navigation";
 
 export const authConfig = {
   session: { strategy: "jwt" },
@@ -32,7 +32,8 @@ export const authConfig = {
 
       if (isPublic) {
         if (isLoggedIn && pathname === "/login") {
-          return Response.redirect(new URL("/dashboard", nextUrl));
+          const target = getDefaultRouteByRole(auth?.user?.role);
+          return Response.redirect(new URL(target, nextUrl));
         }
         return true;
       }

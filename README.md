@@ -102,10 +102,29 @@ Mot de passe pour tous : **`Password123!`**
 
 | Rôle | Accès |
 |------|-------|
-| **SUPER_ADMIN** | Accès total |
-| **ADMIN** | Gestion interne complète |
-| **TECHNICIAN** | Interventions assignées, équipements, tickets assignés |
-| **CUSTOMER** | Ses sites, équipements, tickets et contrats uniquement |
+| **SUPER_ADMIN** | Espace admin (`/admin` + `/dashboard`) |
+| **ADMIN** | Espace admin (`/admin` + `/dashboard`) |
+| **TECHNICIAN** | Espace opérationnel (`/dashboard`) |
+| **CUSTOMER** | Portail client uniquement (`/client`) |
+
+## Portails applicatifs
+
+- **Portail admin** : `/admin/dashboard` (alias sécurisé vers l'espace admin existant), routes historiques conservées sous `/dashboard`
+- **Portail client** : `/client/dashboard`
+- **Redirection post-login par rôle** :
+  - `CUSTOMER` -> `/client/dashboard`
+  - `ADMIN` / `SUPER_ADMIN` -> `/admin/dashboard`
+  - `TECHNICIAN` -> `/dashboard`
+
+### Routes portail client
+
+- `/client/dashboard`
+- `/client/requests`
+- `/client/equipments`
+- `/client/interventions`
+- `/client/documents`
+- `/client/project-info`
+- `/client/profile`
 
 ## Architecture
 
@@ -113,10 +132,13 @@ Mot de passe pour tous : **`Password123!`**
 src/
 ├── app/
 │   ├── api/auth/          # Routes Auth.js
-│   ├── dashboard/         # Pages protégées MVP
+│   ├── dashboard/         # Espace opérationnel/admin historique (conservé)
+│   ├── admin/             # Entrée admin sécurisée
+│   ├── client/            # Portail client dédié
 │   └── login/
 ├── components/
 │   ├── layout/            # AppSidebar
+│   ├── client/            # UI dédiée portail client
 │   ├── dashboard/         # DashboardCard
 │   ├── shared/            # DataTable, StatusBadge, PageHeader
 │   └── [entity]/          # Tables & formulaires par entité

@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { Role } from "@prisma/client";
 import { redirect } from "next/navigation";
 import type { SessionUser } from "@/lib/permissions";
+import { getDefaultRouteByRole } from "@/lib/navigation";
 
 export async function requireAuth(): Promise<SessionUser> {
   const session = await auth();
@@ -23,7 +24,21 @@ export async function requireRole(allowed: Role[]): Promise<SessionUser> {
   const user = await requireAuth();
 
   if (!allowed.includes(user.role)) {
-    redirect("/dashboard");
+    redirect(getDefaultRouteByRole(user.role));
+  }
+
+  return user;
+}
+
+export async function requireCustomer(): Promise<SessionUser> {
+  const user = await requireAuth();
+
+  if (user.role !== Role.CUSTOMER) {
+    redirect(getDefaultRouteByRole(user.role));
+  }
+
+  if (!user.customerId) {
+    redirect("/login");
   }
 
   return user;

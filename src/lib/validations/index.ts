@@ -92,6 +92,13 @@ export const subscriptionSchema = z.object({
   stripeSubscriptionId: z.string().optional(),
 });
 
+export const clientRequestSchema = z.object({
+  siteId: z.string().min(1, "Site requis"),
+  title: z.string().min(3, "Titre requis"),
+  description: z.string().min(10, "Description requise"),
+  priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]).default("MEDIUM"),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type CustomerInput = z.infer<typeof customerSchema>;
 export type SiteInput = z.infer<typeof siteSchema>;
@@ -100,3 +107,4 @@ export type ContractInput = z.infer<typeof contractSchema>;
 export type TicketInput = z.infer<typeof ticketSchema>;
 export type InterventionInput = z.infer<typeof interventionSchema>;
 export type SubscriptionInput = z.infer<typeof subscriptionSchema>;
+export type ClientRequestInput = z.infer<typeof clientRequestSchema>;
