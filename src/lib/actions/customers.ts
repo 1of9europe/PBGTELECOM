@@ -4,12 +4,16 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAuth, requireRole } from "@/lib/session";
 import { customerSchema } from "@/lib/validations";
-import { customerScope } from "@/lib/filters";
-import { Role } from "@prisma/client";
+import { customerScope, contains } from "@/lib/filters";
+import { Role, type Prisma } from "@prisma/client";
 
 type ActionResult = { success: true } | { success: false; error: string };
 
-export async function getCustomers(search?: string) {
+type CustomerWithCount = Prisma.CustomerGetPayload<{
+  include: { _count: { select: { sites: true; tickets: true; contracts: true } } };
+}>;
+
+export async function getCustomers(search?: string): Promise<CustomerWithCount[]> {
   const user = await requireAuth();
   const scope = customerScope(user);
 
@@ -19,9 +23,9 @@ export async function getCustomers(search?: string) {
       ...(search
         ? {
             OR: [
-              { companyName: { contains: search, mode: "insensitive" } },
-              { contactName: { contains: search, mode: "insensitive" } },
-              { email: { contains: search, mode: "insensitive" } },
+              { companyName: contains(search) },
+              { contactName: contains(search) },
+              { email: contains(search) },
             ],
           }
         : {}),

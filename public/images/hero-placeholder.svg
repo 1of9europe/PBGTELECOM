@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1a"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0c1929"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="70%" y1="20%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <!-- Building silhouette -->
+  <rect x="200" y="280" width="420" height="520" rx="4" fill="#1e293b" opacity="0.8"/>
+  <rect x="640" y="180" width="520" height="620" rx="4" fill="#1e293b"/>
+  <rect x="1180" y="350" width="280" height="450" rx="4" fill="#1e293b" opacity="0.7"/>
+  <!-- Windows grid -->
+  <g fill="#0ea5e9" opacity="0.15">
+    <rect x="680" y="240" width="40" height="50" rx="2"/>
+    <rect x="740" y="240" width="40" height="50" rx="2"/>
+    <rect x="800" y="240" width="40" height="50" rx="2"/>
+    <rect x="860" y="240" width="40" height="50" rx="2"/>
+    <rect x="920" y="240" width="40" height="50" rx="2"/>
+    <rect x="980" y="240" width="40" height="50" rx="2"/>
+    <rect x="1040" y="240" width="40" height="50" rx="2"/>
+    <rect x="680" y="320" width="40" height="50" rx="2"/>
+    <rect x="740" y="320" width="40" height="50" rx="2"/>
+    <rect x="800" y="320" width="40" height="50" rx="2"/>
+    <rect x="860" y="320" width="40" height="50" rx="2"/>
+    <rect x="920" y="320" width="40" height="50" rx="2"/>
+    <rect x="980" y="320" width="40" height="50" rx="2"/>
+    <rect x="1040" y="320" width="40" height="50" rx="2"/>
+  </g>
+  <!-- CCTV cameras -->
+  <g transform="translate(720, 160)">
+    <ellipse cx="60" cy="30" rx="50" ry="25" fill="#334155"/>
+    <rect x="20" y="25" width="80" height="30" rx="15" fill="#475569"/>
+    <circle cx="60" cy="40" r="12" fill="#0ea5e9" opacity="0.8"/>
+    <rect x="55" y="55" width="10" height="40" fill="#64748b"/>
+  </g>
+  <g transform="translate(1050, 130)">
+    <ellipse cx="60" cy="30" rx="50" ry="25" fill="#334155"/>
+    <rect x="20" y="25" width="80" height="30" rx="15" fill="#475569"/>
+    <circle cx="60" cy="40" r="12" fill="#0ea5e9" opacity="0.8"/>
+    <rect x="55" y="55" width="10" height="40" fill="#64748b"/>
+  </g>
+  <!-- Technician silhouette -->
+  <g transform="translate(900, 520)">
+    <ellipse cx="80" cy="200" rx="60" ry="15" fill="#000" opacity="0.3"/>
+    <rect x="50" y="80" width="60" height="100" rx="8" fill="#1e3a5f"/>
+    <circle cx="80" cy="55" r="28" fill="#334155"/>
+    <rect x="30" y="100" width="25" height="70" rx="6" fill="#1e3a5f"/>
+    <rect x="105" y="90" width="25" height="50" rx="6" fill="#1e3a5f"/>
+    <!-- Tablet -->
+    <rect x="115" y="110" width="35" height="45" rx="4" fill="#0ea5e9" opacity="0.5"/>
+  </g>
+  <!-- Cable lines -->
+  <path d="M200 750 Q500 700 800 750 T1400 720" stroke="url(#line)" stroke-width="2" fill="none"/>
+  <path d="M100 780 Q400 730 700 780 T1300 750" stroke="url(#line)" stroke-width="1" fill="none" opacity="0.5"/>
+</svg>

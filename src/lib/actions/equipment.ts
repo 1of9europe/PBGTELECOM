@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAuth, requireRole } from "@/lib/session";
 import { equipmentSchema } from "@/lib/validations";
-import { equipmentScope, parseOptionalDate } from "@/lib/filters";
+import { equipmentScope, parseOptionalDate, contains } from "@/lib/filters";
 import { Role } from "@prisma/client";
 
 type ActionResult = { success: true } | { success: false; error: string };
@@ -20,9 +20,9 @@ export async function getEquipment(search?: string, siteId?: string) {
       ...(search
         ? {
             OR: [
-              { brand: { contains: search, mode: "insensitive" } },
-              { model: { contains: search, mode: "insensitive" } },
-              { serialNumber: { contains: search, mode: "insensitive" } },
+              { brand: contains(search) },
+              { model: contains(search) },
+              { serialNumber: contains(search) },
             ],
           }
         : {}),

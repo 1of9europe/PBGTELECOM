@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAuth, requireRole } from "@/lib/session";
 import { interventionSchema } from "@/lib/validations";
-import { interventionScope, parseOptionalDate } from "@/lib/filters";
+import { interventionScope, parseOptionalDate, contains } from "@/lib/filters";
 import { Role } from "@prisma/client";
 
 type ActionResult = { success: true } | { success: false; error: string };
@@ -20,8 +20,8 @@ export async function getInterventions(search?: string, status?: string) {
       ...(search
         ? {
             OR: [
-              { report: { contains: search, mode: "insensitive" } },
-              { site: { name: { contains: search, mode: "insensitive" } } },
+              { report: contains(search) },
+              { site: { name: contains(search) } },
             ],
           }
         : {}),

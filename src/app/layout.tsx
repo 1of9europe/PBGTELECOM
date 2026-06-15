@@ -16,8 +16,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PBG TELECOM — Plateforme SAV",
-  description: "Gestion clients, équipements, maintenance et interventions terrain",
+  title: {
+    default: "PBG TELECOM | Vidéosurveillance, alarmes, contrôle d'accès et réseaux",
+    template: "%s | PBG TELECOM",
+  },
+  description:
+    "PBG TELECOM accompagne entreprises, syndics, commerces, bailleurs et particuliers depuis 2004.",
 };
 
 export default function RootLayout({

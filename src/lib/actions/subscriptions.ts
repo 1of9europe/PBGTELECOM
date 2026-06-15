@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAuth, requireRole } from "@/lib/session";
 import { subscriptionSchema } from "@/lib/validations";
-import { customerLinkedScope } from "@/lib/filters";
+import { customerLinkedScope, contains } from "@/lib/filters";
 import { Role } from "@prisma/client";
 
 type ActionResult = { success: true } | { success: false; error: string };
@@ -20,8 +20,8 @@ export async function getSubscriptions(search?: string, status?: string) {
       ...(search
         ? {
             OR: [
-              { planName: { contains: search, mode: "insensitive" } },
-              { customer: { companyName: { contains: search, mode: "insensitive" } } },
+              { planName: contains(search) },
+              { customer: { companyName: contains(search) } },
             ],
           }
         : {}),

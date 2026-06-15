@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAuth, requireRole } from "@/lib/session";
 import { siteSchema } from "@/lib/validations";
-import { siteScope } from "@/lib/filters";
+import { siteScope, contains } from "@/lib/filters";
 import { Role } from "@prisma/client";
 
 type ActionResult = { success: true } | { success: false; error: string };
@@ -20,8 +20,8 @@ export async function getSites(search?: string, customerId?: string) {
       ...(search
         ? {
             OR: [
-              { name: { contains: search, mode: "insensitive" } },
-              { address: { contains: search, mode: "insensitive" } },
+              { name: contains(search) },
+              { address: contains(search) },
             ],
           }
         : {}),

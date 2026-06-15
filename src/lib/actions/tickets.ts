@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAuth, requireRole } from "@/lib/session";
 import { ticketSchema } from "@/lib/validations";
-import { ticketScope } from "@/lib/filters";
+import { ticketScope, contains } from "@/lib/filters";
 import { Role } from "@prisma/client";
 
 type ActionResult = { success: true } | { success: false; error: string };
@@ -20,8 +20,8 @@ export async function getTickets(search?: string, status?: string) {
       ...(search
         ? {
             OR: [
-              { title: { contains: search, mode: "insensitive" } },
-              { customer: { companyName: { contains: search, mode: "insensitive" } } },
+              { title: contains(search) },
+              { customer: { companyName: contains(search) } },
             ],
           }
         : {}),

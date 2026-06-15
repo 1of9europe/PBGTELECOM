@@ -70,6 +70,11 @@ export function customerLinkedScope(user: SessionUser) {
   return customerScope(user);
 }
 
+/** Filtre contains compatible SQLite (sans mode insensitive) */
+export function contains(value: string) {
+  return { contains: value };
+}
+
 export function parseOptionalDate(value?: string | null) {
   if (!value) return null;
   const date = new Date(value);

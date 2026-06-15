@@ -7,13 +7,17 @@ const { auth } = NextAuth(authConfig);
 
 const adminOnlyPrefixes = ["/dashboard/customers", "/dashboard/subscriptions"];
 
+const publicRoutes = ["/", "/services", "/secteurs", "/a-propos", "/contact"];
+
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const pathname = nextUrl.pathname;
 
   const isPublic =
-    pathname === "/login" || pathname.startsWith("/api/auth");
+    pathname === "/login" ||
+    pathname.startsWith("/api/auth") ||
+    publicRoutes.includes(pathname);
 
   if (isPublic) {
     if (isLoggedIn && pathname === "/login") {
@@ -34,10 +38,6 @@ export default auth((req) => {
     role === Role.CUSTOMER &&
     adminOnlyPrefixes.some((prefix) => pathname.startsWith(prefix))
   ) {
-    return NextResponse.redirect(new URL("/dashboard", nextUrl));
-  }
-
-  if (pathname === "/") {
     return NextResponse.redirect(new URL("/dashboard", nextUrl));
   }
 

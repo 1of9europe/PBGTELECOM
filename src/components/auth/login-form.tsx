@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -63,6 +64,11 @@ export function LoginForm() {
             {pending ? "Connexion..." : "Se connecter"}
           </Button>
         </form>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          <Link href="/" className="text-primary hover:underline">
+            ← Retour au site PBG TELECOM
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
