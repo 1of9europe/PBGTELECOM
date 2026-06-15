@@ -231,7 +231,7 @@ async function main() {
     data: [
       {
         customerId: syndic.id,
-        name: "Contrat Premium Vidéosurveillance",
+        name: "Contrat Premium Vidéoprotection",
         monthlyPrice: 189.0,
         startDate: new Date("2023-07-01"),
         endDate: new Date("2026-06-30"),

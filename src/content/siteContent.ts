@@ -16,11 +16,11 @@ export const company = {
 } as const;
 
 export const seo = {
-  title: "PBG TELECOM | Vidéosurveillance, alarmes, contrôle d'accès et réseaux",
+  title: "PBG TELECOM | Vidéoprotection, alarmes, contrôle d'accès et réseaux",
   description:
-    "PBG TELECOM accompagne entreprises, syndics, commerces, bailleurs et particuliers depuis 2004 dans l'installation, la maintenance et le dépannage de systèmes de vidéosurveillance, alarmes, contrôle d'accès, interphonie et réseaux courants faibles.",
+    "PBG TELECOM accompagne entreprises, syndics, commerces, bailleurs et particuliers depuis 2004 dans l'installation, la maintenance et le dépannage de systèmes de vidéoprotection, alarmes, contrôle d'accès, interphonie et réseaux courants faibles.",
   keywords: [
-    "vidéosurveillance",
+    "vidéoprotection",
     "alarme intrusion",
     "alarme incendie",
     "contrôle d'accès",
@@ -46,9 +46,10 @@ export const navigation = [
 ] as const;
 
 export const footerLinks = [
-  { label: "Services", href: "/#services" },
-  { label: "Secteurs", href: "/#secteurs" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Services", href: "/services" },
+  { label: "Secteurs", href: "/secteurs" },
+  { label: "À propos", href: "/a-propos" },
+  { label: "Contact", href: "/contact" },
   { label: "Espace client", href: CLIENT_PORTAL_URL },
 ] as const;
 
@@ -56,33 +57,45 @@ export const hero = {
   badge: "Expert sécurité & courants faibles depuis 2004",
   title: "Sécurisez vos bâtiments avec un expert terrain depuis 2004",
   subtitle:
-    "Vidéosurveillance, alarmes, contrôle d’accès, interphonie et réseaux courants faibles pour entreprises, syndics, commerces, bailleurs et particuliers.",
+    "Vidéoprotection, alarmes, contrôle d’accès, interphonie et réseaux courants faibles pour entreprises, syndics, commerces, bailleurs et particuliers.",
   ctaPrimary: "Demander un audit gratuit",
   ctaSecondary: "Voir nos services",
+  trustStats: [
+    { value: "20+", label: "ans d'expertise" },
+    { value: "7", label: "métiers couverts" },
+    { value: "100%", label: "audit initial gratuit" },
+    { value: "2", label: "régions IDF & PACA" },
+  ],
+  trustSectors: [
+    "Syndics & immeubles",
+    "Commerces",
+    "Entreprises",
+    "Bailleurs sociaux",
+  ],
   floatingCards: [
-    "+20 ans d'expertise",
-    "Audit gratuit",
-    "Maintenance & dépannage",
-    "Espace client sécurisé",
+    { label: "+20 ans d'expertise", detail: "Depuis 2004" },
+    { label: "Audit gratuit", detail: "Sans engagement" },
+    { label: "Maintenance & dépannage", detail: "Intervention rapide" },
+    { label: "Espace client sécurisé", detail: "Suivi centralisé" },
   ],
 } as const;
 
 export const stats = [
-  { value: "Depuis 2004", label: "Expertise terrain continue" },
-  { value: "+20 ans d'expertise", label: "Solutions fiables et durables" },
-  { value: "Installation & maintenance", label: "Cycle complet de service" },
-  { value: "Syndics, commerces, entreprises", label: "Multi-secteurs B2B/B2C" },
-  { value: "Île-de-France & PACA", label: "Intervention nationale selon projet" },
+  { value: "20+", label: "Années d'expertise terrain", suffix: "" },
+  { value: "7", label: "Domaines de sécurité & réseaux", suffix: "" },
+  { value: "100%", label: "Audit initial gratuit", suffix: "" },
+  { value: "6", label: "Secteurs d'activité couverts", suffix: "" },
+  { value: "2", label: "Régions IDF & PACA", suffix: "+ France" },
 ] as const;
 
 export const services = [
   {
-    id: "videosurveillance",
-    title: "Vidéosurveillance",
+    id: "videoprotection",
+    title: "Vidéoprotection",
     description:
       "Installation de caméras adaptées aux commerces, immeubles, entrepôts, parkings et habitations. Accès à distance possible selon configuration.",
     detail: "Couverture intelligente des zones sensibles",
-    image: "/images/videosurveillance-placeholder.svg",
+    image: "/images/videoprotection.png",
   },
   {
     id: "alarmes-intrusion",
@@ -104,7 +117,7 @@ export const services = [
     description:
       "Badges, digicodes, interphones, accès sécurisés pour immeubles, bureaux et sites sensibles.",
     detail: "Gestion fine des accès et des droits",
-    image: "/images/controle-acces-placeholder.svg",
+    image: "/images/controle-acces.png",
   },
   {
     id: "interphonie",
@@ -119,7 +132,7 @@ export const services = [
     description:
       "Câblage, baie informatique, prises réseau, infrastructure télécom, déplacement de prises et installation d'éclairage.",
     detail: "Infrastructure propre, évolutive et durable",
-    image: "/images/reseaux-placeholder.svg",
+    image: "/images/reseaux.png",
   },
   {
     id: "maintenance",
@@ -127,7 +140,7 @@ export const services = [
     description:
       "Suivi technique, intervention rapide, diagnostic et remise en service des installations existantes.",
     detail: "Support terrain et continuité de service",
-    image: "/images/maintenance-placeholder.svg",
+    image: "/images/maintenance.png",
   },
 ] as const;
 
@@ -143,7 +156,7 @@ export const whyChooseUs = [
 export const sectors = [
   {
     title: "Syndics & immeubles",
-    description: "Vidéosurveillance, interphonie et contrôle d'accès pour copropriétés.",
+    description: "Vidéoprotection, interphonie et contrôle d'accès pour copropriétés.",
   },
   {
     title: "Bailleurs sociaux",
@@ -155,7 +168,7 @@ export const sectors = [
   },
   {
     title: "Bureaux & entreprises",
-    description: "Contrôle d'accès, vidéosurveillance et sécurité globale des sites.",
+    description: "Contrôle d'accès, vidéoprotection et sécurité globale des sites.",
   },
   {
     title: "Entrepôts",
@@ -180,6 +193,7 @@ export const saasSection = {
     "Documents et informations projet",
   ],
   cta: "Accéder à mon espace client",
+  image: "/images/portal-mockup.png",
 } as const;
 
 export const processSteps = [
@@ -194,7 +208,7 @@ export const processSteps = [
 export const realizations = [
   {
     title: "Sécurisation d'immeubles collectifs",
-    description: "Interphonie, contrôle d'accès et vidéosurveillance des parties communes.",
+    description: "Interphonie, contrôle d'accès et vidéoprotection des parties communes.",
   },
   {
     title: "Installation de caméras pour commerces",
@@ -214,7 +228,7 @@ export const faq = [
   {
     question: "Intervenez-vous pour les particuliers ?",
     answer:
-      "Oui. PBG TELECOM intervient auprès des particuliers pour la vidéosurveillance, les alarmes, l'interphonie et le contrôle d'accès résidentiel.",
+      "Oui. PBG TELECOM intervient auprès des particuliers pour la vidéoprotection, les alarmes, l'interphonie et le contrôle d'accès résidentiel.",
   },
   {
     question: "Faites-vous les syndics d'immeuble ?",
@@ -249,7 +263,7 @@ export const faq = [
 ] as const;
 
 export const contactNeedTypes = [
-  "Vidéosurveillance",
+  "Vidéoprotection",
   "Alarme intrusion",
   "Alarme incendie",
   "Contrôle d'accès",
@@ -263,7 +277,7 @@ export const contactNeedTypes = [
 export const aboutContent = {
   title: "Expert en systèmes de sécurité depuis 2004",
   paragraphs: [
-    "PBG TELECOM est une société spécialisée dans les solutions de sécurité, vidéosurveillance, alarmes, contrôle d'accès, interphonie, réseaux informatiques et courants faibles.",
+    "PBG TELECOM est une société spécialisée dans les solutions de sécurité, vidéoprotection, alarmes, contrôle d'accès, interphonie, réseaux informatiques et courants faibles.",
     "Depuis 2004, nous accompagnons entreprises, commerces, bailleurs sociaux, collectivités, syndics d'immeuble, entrepôts, magasins et particuliers avec une approche terrain, réactive et sur mesure.",
     "Notre engagement : des installations durables, un suivi long terme et un accompagnement de l'audit à la maintenance.",
   ],

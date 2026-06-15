@@ -97,7 +97,7 @@ export function MarketingFooter() {
             © {currentYear} {company.name}. Tous droits réservés.
           </p>
           <p className="text-xs text-slate-500/90">
-            Vidéosurveillance · Alarmes · Contrôle d&apos;accès · Courants faibles
+            Vidéoprotection · Alarmes · Contrôle d&apos;accès · Courants faibles
           </p>
         </div>
       </div>

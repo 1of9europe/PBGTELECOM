@@ -15,7 +15,7 @@ import { services } from "@/content/siteContent";
 import { Reveal } from "@/components/marketing/Reveal";
 
 const iconMap: Record<string, LucideIcon> = {
-  videosurveillance: Camera,
+  videoprotection: Camera,
   "alarmes-intrusion": ShieldAlert,
   "alarme-incendie": Flame,
   "controle-acces": KeyRound,
@@ -42,9 +42,10 @@ export function ServicesSection() {
                   <div className="mb-4 overflow-hidden rounded-xl border border-white/10">
                     <Image
                       src={service.image}
-                      alt={service.title}
+                      alt={`Installation ${service.title} — PBG TELECOM`}
                       width={400}
                       height={250}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
                       className="aspect-[16/10] w-full object-cover opacity-85 transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100"
                     />
                   </div>

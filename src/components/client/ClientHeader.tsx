@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { Plus, User } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button-link";
 
 type ClientHeaderProps = {
   customerName: string;
@@ -22,18 +22,18 @@ export function ClientHeader({ customerName, userName }: ClientHeaderProps) {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button asChild className="bg-blue-600 text-white hover:bg-blue-500">
-            <Link href="/client/requests?new=1">
-              <Plus className="mr-2 h-4 w-4" />
-              Nouvelle demande
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="border-slate-700 bg-transparent text-slate-100 hover:bg-slate-900">
-            <Link href="/client/profile">
-              <User className="mr-2 h-4 w-4" />
-              Profil
-            </Link>
-          </Button>
+          <ButtonLink href="/client/requests?new=1" className="bg-blue-600 text-white hover:bg-blue-500">
+            <Plus className="mr-2 h-4 w-4" />
+            Nouvelle demande
+          </ButtonLink>
+          <ButtonLink
+            href="/client/profile"
+            variant="outline"
+            className="border-slate-700 bg-transparent text-slate-100 hover:bg-slate-900"
+          >
+            <User className="mr-2 h-4 w-4" />
+            Profil
+          </ButtonLink>
           <Button
             variant="ghost"
             className="text-slate-300 hover:bg-slate-900 hover:text-white"

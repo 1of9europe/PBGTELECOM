@@ -3,12 +3,14 @@ import { RealizationsSection } from "@/components/marketing/RealizationsSection"
 import { ContactSection } from "@/components/marketing/ContactSection";
 import { SectionWrapper } from "@/components/marketing/SectionWrapper";
 import { ButtonLink } from "@/components/ui/button-link";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Secteurs",
   description:
     "PBG TELECOM sécurise syndics, bailleurs sociaux, commerces, entrepôts et particuliers en Île-de-France et PACA.",
-};
+  path: "/secteurs",
+});
 
 export default function SecteursPage() {
   return (

@@ -1,5 +1,12 @@
 import { Suspense } from "react";
 import { LoginForm } from "@/components/auth/login-form";
+import type { Metadata } from "next";
+import { privateAreaRobots } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Connexion",
+  robots: privateAreaRobots,
+};
 
 export default function LoginPage() {
   return (

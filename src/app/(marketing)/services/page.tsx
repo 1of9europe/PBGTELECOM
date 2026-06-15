@@ -3,12 +3,14 @@ import { ProcessSection } from "@/components/marketing/ProcessSection";
 import { ContactSection } from "@/components/marketing/ContactSection";
 import { SectionWrapper } from "@/components/marketing/SectionWrapper";
 import { ButtonLink } from "@/components/ui/button-link";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Services",
   description:
-    "Vidéosurveillance, alarmes intrusion et incendie, contrôle d'accès, interphonie, réseaux courants faibles et maintenance par PBG TELECOM.",
-};
+    "Vidéoprotection, alarmes intrusion et incendie, contrôle d'accès, interphonie, réseaux courants faibles et maintenance par PBG TELECOM.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
@@ -22,7 +24,7 @@ export default function ServicesPage() {
             Solutions de sécurité sur mesure
           </h1>
           <p className="mt-4 text-base leading-relaxed text-slate-400 md:text-lg">
-            PBG TELECOM conçoit, installe et maintient des systèmes de vidéosurveillance,
+            PBG TELECOM conçoit, installe et maintient des systèmes de vidéoprotection,
             alarmes, contrôle d&apos;accès et réseaux courants faibles adaptés à chaque site.
           </p>
           <ButtonLink

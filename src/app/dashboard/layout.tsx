@@ -2,6 +2,13 @@ import { requireAuth } from "@/lib/session";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { Role } from "@prisma/client";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+import { privateAreaRobots } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Administration",
+  robots: privateAreaRobots,
+};
 
 export default async function DashboardLayout({
   children,

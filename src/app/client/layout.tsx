@@ -1,6 +1,13 @@
 import { ClientSidebar } from "@/components/client/ClientSidebar";
 import { ClientHeader } from "@/components/client/ClientHeader";
 import { getClientContext } from "@/lib/actions/client";
+import type { Metadata } from "next";
+import { privateAreaRobots } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Espace client",
+  robots: privateAreaRobots,
+};
 
 export default async function ClientLayout({
   children,

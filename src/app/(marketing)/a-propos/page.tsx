@@ -4,12 +4,14 @@ import { ContactSection } from "@/components/marketing/ContactSection";
 import { SectionWrapper } from "@/components/marketing/SectionWrapper";
 import { aboutContent, company } from "@/content/siteContent";
 import { ButtonLink } from "@/components/ui/button-link";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "À propos",
   description:
-    "Expert en systèmes de sécurité depuis 2004. PBG TELECOM accompagne entreprises et particuliers en vidéosurveillance, alarmes et contrôle d'accès.",
-};
+    "Expert en systèmes de sécurité depuis 2004. PBG TELECOM accompagne entreprises et particuliers en vidéoprotection, alarmes et contrôle d'accès.",
+  path: "/a-propos",
+});
 
 export default function AboutPage() {
   return (

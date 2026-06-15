@@ -14,7 +14,7 @@ import {
   UserCircle2,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type ClientNavItem = {
@@ -70,10 +70,13 @@ export function ClientSidebar() {
 
       <div className="border-b border-slate-800 bg-black/90 p-3 md:hidden">
         <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="border-slate-700 bg-slate-900 text-slate-100">
-              <Menu className="h-4 w-4" />
-            </Button>
+          <SheetTrigger
+            className={cn(
+              buttonVariants({ variant: "outline", size: "icon" }),
+              "border-slate-700 bg-slate-900 text-slate-100"
+            )}
+          >
+            <Menu className="h-4 w-4" />
           </SheetTrigger>
           <SheetContent side="left" className="w-72 border-slate-800 bg-black p-4">
             <SidebarPanel mobile />

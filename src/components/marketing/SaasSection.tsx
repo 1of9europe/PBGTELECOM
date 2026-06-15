@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Lock,
   ClipboardList,
@@ -5,7 +6,6 @@ import {
   ServerCog,
   MessageSquare,
   FileText,
-  MonitorSmartphone,
 } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { SectionWrapper } from "@/components/marketing/SectionWrapper";
@@ -39,7 +39,7 @@ export function SaasSection() {
           <ButtonLink
             href={CLIENT_PORTAL_URL}
             size="lg"
-            className="mt-8 h-11 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 px-6 text-slate-950 shadow-[0_0_36px_-12px_rgba(34,211,238,0.9)] hover:from-sky-400 hover:to-cyan-300"
+            className="mt-8 h-11 rounded-lg bg-white px-6 font-medium text-slate-950 transition-colors hover:bg-slate-100"
           >
             {saasSection.cta}
           </ButtonLink>
@@ -62,57 +62,16 @@ export function SaasSection() {
         </Reveal>
 
         <Reveal delayMs={120}>
-          <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#0b1324]/90 p-4 shadow-[0_30px_80px_-35px_rgba(0,0,0,0.85)]">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div className="flex gap-1.5">
-                <span className="size-2.5 rounded-full bg-rose-400/70" />
-                <span className="size-2.5 rounded-full bg-amber-300/70" />
-                <span className="size-2.5 rounded-full bg-emerald-400/70" />
-              </div>
-              <span className="flex items-center gap-2 text-xs text-slate-400">
-                <MonitorSmartphone className="size-3.5" />
-                Portail client securise
-              </span>
-            </div>
-
-            <div className="mt-4 grid gap-4">
-              <div className="rounded-2xl border border-cyan-400/20 bg-cyan-300/[0.06] p-4">
-                <p className="text-xs uppercase tracking-wider text-cyan-200">Interventions</p>
-                <div className="mt-3 flex items-center justify-between rounded-xl border border-white/10 bg-[#121c31] px-3 py-2">
-                  <span className="text-sm text-slate-200">Maintenance preventive</span>
-                  <span className="rounded-full bg-emerald-400/15 px-2 py-1 text-xs text-emerald-300">
-                    Planifiee
-                  </span>
-                </div>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-[#111b30] p-4">
-                  <p className="text-xs uppercase tracking-wider text-slate-400">Equipements</p>
-                  <p className="mt-3 text-2xl font-semibold text-white">126</p>
-                  <p className="text-xs text-slate-400">actifs et suivis</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-[#111b30] p-4">
-                  <p className="text-xs uppercase tracking-wider text-slate-400">Demandes</p>
-                  <p className="mt-3 text-2xl font-semibold text-white">08</p>
-                  <p className="text-xs text-slate-400">en cours de traitement</p>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-[#111b30] p-4">
-                <p className="text-xs uppercase tracking-wider text-slate-400">Documents projet</p>
-                <div className="mt-3 space-y-2">
-                  <div className="flex items-center justify-between rounded-lg border border-white/8 bg-[#0d1526] px-3 py-2 text-sm text-slate-300">
-                    <span>Plan implantation cameras</span>
-                    <span className="text-xs text-cyan-300">PDF</span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-lg border border-white/8 bg-[#0d1526] px-3 py-2 text-sm text-slate-300">
-                    <span>Rapport intervention 14/06</span>
-                    <span className="text-xs text-cyan-300">SIGNE</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[#0a1220]/90 p-1.5 shadow-[0_24px_64px_-32px_rgba(0,0,0,0.9)] md:rounded-3xl md:p-2">
+            <Image
+              src={saasSection.image}
+              alt="Interface espace client PBG TELECOM — suivi interventions, équipements et documents"
+              width={1600}
+              height={900}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="aspect-[16/10] w-full rounded-[1.1rem] object-cover md:rounded-[1.35rem]"
+            />
+            <div className="pointer-events-none absolute inset-x-1.5 bottom-1.5 top-1.5 rounded-[1rem] bg-gradient-to-t from-[#04080f]/30 via-transparent to-transparent md:inset-x-2 md:bottom-2 md:top-2 md:rounded-[1.2rem]" />
           </div>
         </Reveal>
       </div>

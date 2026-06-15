@@ -8,7 +8,7 @@ Utilisez ces prompts dans DALL·E, Midjourney, Leonardo ou Canva IA pour génér
 Photorealistic premium corporate security technician installing CCTV cameras in a modern commercial building, dark navy and black atmosphere, subtle blue lighting, professional telecom and low-voltage cabling environment, cinematic lighting, realistic, high-end corporate website hero image, no text, no logo
 ```
 
-## Vidéosurveillance (`videosurveillance.jpg`)
+## Vidéoprotection (`videoprotection.jpg`)
 
 ```
 Modern CCTV surveillance cameras installed on a premium commercial building facade, dark blue corporate lighting, realistic, clean composition, professional security company website image, no text, no logo

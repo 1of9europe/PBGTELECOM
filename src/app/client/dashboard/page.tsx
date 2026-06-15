@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   Activity,
   Cable,
@@ -10,7 +9,7 @@ import {
   Plus,
   ShieldCheck,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button-link";
 import { ClientDashboardCard } from "@/components/client/ClientDashboardCard";
 import { ClientFeatureCard } from "@/components/client/ClientFeatureCard";
 import { ClientPageHeader } from "@/components/client/ClientPageHeader";
@@ -36,15 +35,17 @@ export default async function ClientDashboardPage() {
         description="Un espace clair pour piloter votre activité avec PBG TELECOM."
         actions={
           <>
-            <Button asChild className="bg-blue-600 text-white hover:bg-blue-500">
-              <Link href="/client/requests?new=1">
-                <Plus className="mr-2 h-4 w-4" />
-                Créer une demande
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="border-slate-700 bg-transparent text-slate-100 hover:bg-slate-900">
-              <Link href="/client/equipments">Voir mes équipements</Link>
-            </Button>
+            <ButtonLink href="/client/requests?new=1" className="bg-blue-600 text-white hover:bg-blue-500">
+              <Plus className="mr-2 h-4 w-4" />
+              Créer une demande
+            </ButtonLink>
+            <ButtonLink
+              href="/client/equipments"
+              variant="outline"
+              className="border-slate-700 bg-transparent text-slate-100 hover:bg-slate-900"
+            >
+              Voir mes équipements
+            </ButtonLink>
           </>
         }
       />
